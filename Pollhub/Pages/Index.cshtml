@@ -1,0 +1,37 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+<!DOCTYPE html>
+<html>
+
+<head >
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+  
+</head>
+
+<div class="container my-5">
+    <h1 class="text-center title-container">Welcome to PollHub</h1>
+    <p class="lead text-center">PollHub is a web app that allows users to create and vote on polls.</p>
+    <hr>
+    <h2>Create a Poll</h2>
+    <p>To create a poll, click on the "Create Poll" button on the navbar. You will be prompted to enter a question and answer options for your poll. You can also set a time frame for the poll to last.</p>
+    <p>When you're done creating the poll, click on the "Create" button. A link will be generated for you to share with others so they can access the poll you created.</p>
+    <p>Please note that to be able to repeatedly see details on created polls, you must sign up or log in to your account as poll details will show once when created. Additionally, it is recommended that you take a screenshot or copy the poll link and share it with voters.</p>
+    <hr>
+    <h2>Vote on a Poll</h2>
+    <p>To vote on a poll, click on the "Vote" button on the navbar. You will be asked to enter a link to the poll that you want to vote on.</p>
+    <p>Once you enter the link, click on the "Start Voting" button to access the poll. You can vote on the poll within the set time frame.</p>
+</div>
+
+@*
+<div class="text-center">
+    <h1 class="display-4">Welcomeee</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+*@
+</html>

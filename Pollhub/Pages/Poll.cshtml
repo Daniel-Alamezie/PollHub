@@ -1,0 +1,62 @@
+﻿@page "{id}"
+@model Pollhub.Pages.PollModel
+@{
+    ViewData["Title"] = "Poll";
+
+}
+<!Doctype Html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mt-5 question-container">@Model.Poll?.Question</h1>
+        <hr />
+        <form class="text-center" method="post" asp-page-handler="OnPost">
+            @if (Model.Poll != null && Model.Poll.Options != null)
+            {
+                var totalVotes = Model.Poll.Options.Sum(o => o.Votes);
+                foreach (var option in Model.Poll.Options)
+                {
+                    <div class="option" onclick="selectOption(this)">
+                        <div class="option-text">@option.Text</div>
+                        <div class="liquid-bar" style="height: @(totalVotes > 0 ? option.Votes * 100 / totalVotes : 0)%;"></div>
+                        <div class="vote-count">@option.Votes vote(s)</div>
+                    </div>
+                }
+            }
+            <input type="hidden" name="option" id="selected-option" />
+            <button type="submit" class="btn btn-primary btn-lg mt-4" disabled="disabled" id="submit-button">Submit Vote</button>
+        </form>
+
+    </div>
+</body>
+
+<script>
+    function selectOption(option) {
+        // Get the previously selected option
+        var previouslySelectedOption = document.querySelector('.option.selected');
+
+        // If there was a previously selected option, deselect it
+        if (previouslySelectedOption) {
+            previouslySelectedOption.classList.remove('selected');
+        }
+
+        // Select the clicked option
+        option.classList.add('selected');
+
+        // Set the value of the hidden input to the text of the selected option
+        var selectedOptionInput = document.getElementById('selected-option');
+        selectedOptionInput.value = option.querySelector('.option-text').textContent;
+
+        // Enable the submit button
+        var submitButton = document.getElementById('submit-button');
+        submitButton.removeAttribute('disabled');
+    }
+</script>
+
+
+</html>

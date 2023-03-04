@@ -1,0 +1,44 @@
+﻿@page "{id}"
+@model Pollhub.Pages.PollViewModel
+@{
+
+}
+<div class="container my-5">
+    <div class="text-center">
+        <h1 class="title-container">Poll Details</h1>
+        <hr />
+        <h2 class="label-wrap">Question</h2>
+        <p class="question-wrap"> @Model.Poll.Question</p>
+        <hr />
+        <h2 class="container label-wrap">Options</h2>
+        @foreach (var option in Model.Poll.Options)
+        {
+            <div class="option">@option.Text</div>
+        }
+        <hr />
+        <div class="details-container">
+            <p>Duration: @Model.Poll.Duration minutes</p>
+
+            <div class="form-group">
+                <label for="key">Key:</label>
+                <div class="input-group input-box">
+                    <input type="text" id="key" class="form-control" value="@Model.Poll.Key" readonly>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" onclick="copyKey()">Copy</button>
+                    </div>
+                </div>
+            </div>
+
+            <p class="mt-3">Expiration Time: @Model.Poll.ExpirationTime</p>
+        </div>
+        <hr />
+    </div>
+</div>
+
+<script>
+    function copyKey() {
+        var key = document.getElementById("key");
+        key.select();
+        document.execCommand("copy");
+    }
+</script>

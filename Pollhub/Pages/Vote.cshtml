@@ -1,0 +1,67 @@
+﻿@page
+@model Pollhub.Pages.VoteModel
+@{
+     ViewData["Title"] = "Vote On A Poll";
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+   
+</head>
+
+@*Vote on a poll html*@
+
+<div class="container my-5">
+    <h1 class="text-center title-container">Vote On A Poll</h1>
+    <hr/>
+    <form method="post" asp-page-handler="OnPostAsync" >
+        <div class="text-center">
+            <p class="text-center">Please enter the Key to access the poll. Please note that if the key is invalid, the poll will not be displayed.</p>
+            <div class="form-group">
+                <label for="key">Enter Key:</label>
+                <input type="text" class="form-control" id="key" name="key" placeholder="Enter key">
+                <button type="submit" class="btn btn-primary">Get Poll</button>
+            </div>
+            <div class="error-msg mt-2">
+                @if (!ModelState.IsValid)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @foreach (var modelState in ViewData.ModelState.Values)
+                        {
+                            foreach (var error in modelState.Errors)
+                            {
+                                <span>@error.ErrorMessage</span>
+                            }
+                        }
+                    </div>
+                }
+
+            </div>
+        </div>
+    </form>
+   
+</div>
+@section Scripts{
+    <script>
+        $('form').submit(function (event) {
+            var keyInput = $('#key');
+            var invalidInputs = [];
+
+            if (keyInput.val().trim() == '') {
+                invalidInputs.push(keyInput);
+            }
+
+            if (invalidInputs.length > 0) {
+                event.preventDefault();
+                invalidInputs.forEach(function (input) {
+                    input.addClass('is-invalid');
+                });
+            }
+        });
+    </script>
+}
+
+</html>

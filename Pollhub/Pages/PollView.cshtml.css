@@ -1,0 +1,38 @@
+﻿
+.title-container {
+    font-weight: bold;
+    font-size: 45px;
+}
+.option {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+    position: relative;
+    overflow: hidden;
+    height: 70px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.container {
+    max-width: 600px;
+}
+.details-container {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-weight:bold;
+}
+.input-box {
+    width: 50%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.label-wrap{
+    font-weight:bold;
+}
+.question-wrap{
+    font-weight:bold;
+}

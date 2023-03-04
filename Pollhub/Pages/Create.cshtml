@@ -1,0 +1,96 @@
+﻿@page
+@model Pollhub.Pages.CreateModel
+@{
+    ViewData["Title"] = "Create Poll";
+}
+@*
+this is the create page. Holds the html for the create page *@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+
+</head>
+
+
+<div class="container my-5">
+    <h1 class="text-center title-container">Create Poll</h1>
+    <hr/>
+    <form method="post" asp-page-handler="OnPostAsync">
+       @* Form for the user to create a new poll*@
+        <div class="form-group">
+            <label for="question">Question:</label>
+            <input type="text" class="form-control" id="question" name="question" placeholder="Enter question">
+            <label for="options">Options:</label>
+            <div id="options">
+                <div class="input-group mb-3">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary add-option" type="button">Add</button>
+                    </div>
+                </div>
+            </div>
+            <label for="timeFrame">Time Frame:</label>
+           <input type="number" class="form-control" id="time-frame" name="timeFrame" placeholder="Time frame in minutes" min="1" max="10080">
+
+        </div>
+        <button type="submit" class="btn btn-primary">Create Poll</button>
+    </form>
+</div>
+@section Scripts {
+    <script>
+           $(function () {
+        var optionsWrapper = $('#options');
+        var addOptionButton = $('.add-option');
+        var form = $('form');
+
+        addOptionButton.click(function () {
+            var numOptions = optionsWrapper.children('.input-group').length;
+
+            if (numOptions < 8){
+                 var newOption = $('<div class="input-group mb-3"><input type="text" class="form-control" name="option" placeholder="Enter option" style="box-shadow: 0px 3px 5px rgba(0,0,0,0.5);"><div class="input-group-append"><button class="btn btn-outline-secondary remove-option" type="button">Remove</button></div></div>');
+                 optionsWrapper.append(newOption);
+            }else{
+                alert("You can't add more than 8 options!.");
+            }
+        });
+
+        optionsWrapper.on('click', '.remove-option', function () {
+            $(this).parent().parent().remove();
+        });
+
+        form.submit(function(event) {
+            var questionInput = $('#question');
+            var inputs = $('input[name="option"]');
+            var timeFrameInput = $('#time-frame');
+            var invalidInputs = [];
+
+            if (questionInput.val().trim() === '') {
+                invalidInputs.push(questionInput);
+            }
+
+            inputs.each(function () {
+                if ($(this).val().trim() === '') {
+                    invalidInputs.push($(this));
+                }
+            });
+
+            if (timeFrameInput.val().trim() === '') {
+                invalidInputs.push(timeFrameInput);
+            }
+
+            if (invalidInputs.length > 0) {
+                event.preventDefault();
+                invalidInputs.forEach(function (input) {
+                    input.addClass('is-invalid');
+                });
+            }
+        });
+    });
+
+    </script>
+    }
+
+</html>

@@ -1,0 +1,37 @@
+﻿@page "{id}"
+@model Pollhub.Pages.PollResultsModel
+@{
+    ViewData["Title"] = "Poll Result";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <body>
+        <div class="container">
+           
+            <hr />
+            <div class="text-center mt-5">
+                <h1 class="text-center question-container">@Model.Poll?.Question</h1>
+                @if (Model.Poll != null && Model.Poll.Options != null)
+                {
+                    var totalVotes = Model.Poll.Options.Sum(o => o.Votes);
+                    foreach (var option in Model.Poll.Options)
+                    {
+                        <div class="option" onclick="selectOption(this)">
+                            <div class="option-text">@option.Text</div>
+                            <div class="liquid-bar" style="height: @(totalVotes > 0 ? option.Votes * 100 / totalVotes : 0)%;"></div>
+                            <div class="vote-count">@option.Votes vote(s)</div>
+                        </div>
+                    }
+                }
+            </div>
+                
+        </div>
+    </body>
+</body>
+</html>
