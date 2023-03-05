@@ -1,0 +1,38 @@
+﻿.title-container {
+    font-weight: bold;
+}
+.container{
+    width:600px;
+}
+.question-container {
+    
+    font-weight: bold;
+}
+.chart-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    height: 400px;
+    padding: 10px;
+    justify-content: space-between;
+}
+.bar {
+    width: 70px;
+    background-color: #4CAF50;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: center;
+    
+}
+.label {
+    padding: 5px;
+    font-size: 10px;
+    font-weight:bold;
+    font-size:13px;
+    
+   
+}
+.vote-count{
+    font-weight: bold;
+}

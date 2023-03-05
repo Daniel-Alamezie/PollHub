@@ -15,6 +15,7 @@ namespace Pollhub.Pages
             _httpContextAccessor = httpContextAccessor;
         }
         public Poll Poll { get; set; }
+        public TimeSpan TimeLeft { get; set; }
         public IActionResult OnGet(int id)
         {
             Poll = _context.Polls.Find(id);
@@ -23,8 +24,11 @@ namespace Pollhub.Pages
             {
                 return NotFound();
             }
+            TimeLeft = Poll.ExpirationTime - DateTime.UtcNow;
 
             return Page();
         }
+      
+
     }
 }

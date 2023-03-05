@@ -1,4 +1,36 @@
-﻿@page
+﻿@page "{id}"
 @model Pollhub.Pages.NoPollPageModel
 @{
+    ViewData["Title"] = "Poll Resutls";
 }
+<!Doctype html>
+<html>
+    <head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+
+    </head>
+<div class="container my-5">
+    <h1 class="text-center title-container">Poll Results</h1>
+    <hr/>
+    <h1 class="text-center question-container">@Model.Poll?.Question</h1>
+    @if (Model.Poll != null && Model.Poll.Options != null)
+    {
+        var totalVotes = Model.Poll.Options.Sum(o => o.Votes);
+        <div class="chart-container ">
+            @foreach (var option in Model.Poll.Options)
+            {
+                <div class="bar" style="height: @(option.Votes * 300)px;">
+                    <div class="label mb-3">@option.Text</div>
+                    <div class="vote-count mt-2 ">@option.Votes vote(s)</div>
+                </div>
+            }
+        </div>
+    }
+    <hr />
+    <p class="text-center">Please note, this poll will be deleted from the database 4 days aftrer the poll ends.</p>
+
+</div>
+
+</html>
+

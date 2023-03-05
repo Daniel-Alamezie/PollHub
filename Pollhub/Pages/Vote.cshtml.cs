@@ -36,7 +36,7 @@ namespace Pollhub.Pages
             if (poll.Status == "Closed")
             {
                 // Redirect to NoPollPage if poll is closed
-                return RedirectToPage("/NoPollPage");
+                return RedirectToPage("/NoPollPage", new { id = poll.Id, poll = poll });
             }
 
 
